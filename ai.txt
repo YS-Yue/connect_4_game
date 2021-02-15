@@ -1,0 +1,39 @@
+AI Algorithm:
+This alogorithm enables the AI to pick the next move that will maximize the benefit.
+
+
+When it is the AI's turn to drop a disk:
+
+	find all possible columns for the disk:
+		valid_col = [all the columns that are not full]
+		find all columns that are not full, associate with their lowest empty row, respectively
+	
+	pick the best column to drop the new disk:
+		for column in valid_col:
+			temp_play_board = copy.deepcopy(play_board)
+			row = the lowest empty row of the column
+			copy_play_board[column][row] = AI
+			evaluate the outcome by scoring this copy_play_board:
+				adding up the scores of all vertical, horizontal, and diagonal arrays with a length of 4:
+					for every array in the copy_play_board:
+						if there are four AI's disks:
+							score = 1000000, which means the AI won the game
+						elif there are three AI's disks and one empty position:
+							score = 10
+						elif there are two AI's disks and two empty positions:
+							score = 2
+						elif there are two player's disks and two empty positions:
+							score = -50
+						elif there are three player's disks and one empty position:
+							score = -100, which means the player could win in the next move
+						else:
+							score = 0, ingore nonsignificant arrays
+						
+		choose the column leading to the highest score
+
+
+Implemented this algorithm, the AI drops the disks like a real human, comparing outcomes of all possible options for the next step to find the best move.
+In 20 plays, the AI beated me for 11 times, lose for 8 times, and the game ended in a draw for 1 time.
+I am satisfied with the game experience for now. But I also learned a little bit of the Mini-Max algorithm, which explorates all the future moves to find an optimal decision.
+I may use the mini-max algorithm to improve my AI in the future and make it much smarter than a human player.
+
